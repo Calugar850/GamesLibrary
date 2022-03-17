@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous" />
+</head>
+<body>
+<div>
+    <div class="container">
+
+        <h3>List User</h3>
+        <hr/>
+        <a th:href="@{/addOneUser}" class="btn btn-primary">Add User</a>
+        <a th:href="@{/allUsers}" class="btn btn-primary">All Users</a>
+        <table class="table table-bordered table-striped">
+
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Adresa</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="u: ${user}">
+                <td th:text="${u.username}"></td>
+                <td th:text="${u.email}"></td>
+                <td th:text="${u.adresa}"></td>
+                <td>
+                    <a th:href="@{/updateUser(id=${u.idUser})}" class="btn btn-info">Update</a>
+                </td>
+                <td>
+                    <a th:href="@{/deleteUser(id=${u.idUser})}" class="btn btn-info">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

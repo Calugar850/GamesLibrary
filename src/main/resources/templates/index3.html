@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous" />
+</head>
+<body>
+<div class="container">
+
+    <h3>List Facturi</h3>
+    <hr/>
+    <a th:href="@{/addOneBill}" class="btn btn-primary">Add Bill</a>
+    <a th:href="@{/allBills}" class="btn btn-primary">All Bills</a>
+    <table class="table table-bordered table-striped">
+
+        <thead>
+        <tr>
+            <th>Nume</th>
+            <th>Adresa</th>
+            <th>Suma</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="b: ${bill}">
+            <td th:text="${b.nume}"></td>
+            <td th:text="${b.adresa}"></td>
+            <td th:text="${b.suma}"></td>
+            <td>
+                <a th:href="@{/updateBill(id=${b.idFactura})}" class="btn btn-info">Update</a>
+            </td>
+            <td>
+                <a th:href="@{/deleteBill(id=${b.idFactura})}" class="btn btn-info">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+</div>
+
+</body>
+</html>

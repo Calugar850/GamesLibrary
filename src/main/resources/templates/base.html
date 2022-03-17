@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous" />
+</head>
+<body>
+<div class="container">
+
+    <h3>Add New User</h3>
+    <hr/>
+
+    <form th:action="@{/addOneUser}" th:object="${user}" method="GET"><br />
+        <label>Username</label><input type="text" name="username" th:field="*{username}"/><br />
+        <label>Email</label><input type="email" name="email" th:field="*{email}"/><br />
+        <label>Parola</label><input type="password" name="parola" th:field="*{parola}"/><br />
+        <label>Adresa</label><input type="text" name="adresa" th:field="*{adresa}"/><br />
+        <button name="Submit" type="submit" value="0">Submit</button><br />
+        <input type="hidden" th:field="*{idUser}" />
+    </form>
+</div>
+</body>
+</html>
