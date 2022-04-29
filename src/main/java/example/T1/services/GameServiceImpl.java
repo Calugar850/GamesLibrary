@@ -78,4 +78,53 @@ public class GameServiceImpl implements GameService {
     public void deleteGameByID(Integer id) {
         gameRepository.deleteById(id);
     }
+
+    /**
+     * This method call is used to retrieve a list of games based on publisher
+     * @param publisher String
+     * @return game List
+     */
+    @Override
+    public List<Game> getGamesByPublisher(String publisher){
+        List<Game> games=new ArrayList<>();
+        for(Game g: gameRepository.findAll()){
+            if(g.getPublisher().equals(publisher)){
+                games.add(g);
+            }
+        }
+        return games;
+    }
+
+    /**
+     * This method call is used to retrieve a list of games based on gen
+     * @param gen String
+     * @return game List
+     */
+    @Override
+    public List<Game> getGamesByGen(String gen) {
+        List<Game> games=new ArrayList<>();
+        for(Game g: gameRepository.findAll()){
+            if(g.getGen().equals(gen)){
+                games.add(g);
+            }
+        }
+        return games;
+    }
+
+    /**
+     * This method call is used to retrieve a list of games based on year
+     * @param anAparitie int
+     * @return game List
+     */
+    @Override
+    public List<Game> getGamesByAnAparitie(int anAparitie) {
+        List<Game> games=new ArrayList<>();
+        for(Game g: gameRepository.findAll()){
+            if(g.getAnAparitie()==anAparitie){
+                games.add(g);
+            }
+        }
+        return games;
+    }
+
 }

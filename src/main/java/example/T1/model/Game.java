@@ -153,4 +153,19 @@ public class Game {
     public void setDescriere(String descriere) {
         this.descriere = descriere;
     }
+
+    /**
+     * This method return our object under a string form for a better visualization
+     * @return String
+     */
+    @Override
+    public String toString() {
+        return "idGame " + idGame +
+                " nume " + nume +
+                " anAparitie " + anAparitie +
+                " publisher " + publisher +
+                " pret " + pret +
+                " gen " + gen +
+                " descriere " + descriere;
+    }
 }

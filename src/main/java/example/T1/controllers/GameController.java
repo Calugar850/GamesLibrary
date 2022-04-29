@@ -145,4 +145,36 @@ public class GameController {
         gameService.deleteGameByID(idGame);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+
+    /**
+     * This API call is used to retrieve a list of games based on publisher
+     * @param publisher String
+     * @return game List
+     */
+    @GetMapping({"/studio/{publisher}"})
+    public ResponseEntity<List<Game>> getGamesByPublisher(@PathVariable("publisher") String publisher){
+        return new ResponseEntity<>(gameService.getGamesByPublisher(publisher), HttpStatus.OK);
+    }
+
+    /**
+     * This API call is used to retrieve a list of games based on gen
+     * @param gen String
+     * @return game List
+     */
+    @GetMapping({"/type/{gen}"})
+    public ResponseEntity<List<Game>> getGamesByGen(@PathVariable("gen") String gen){
+        return new ResponseEntity<>(gameService.getGamesByGen(gen), HttpStatus.OK);
+    }
+
+    /**
+     * This API call is used to retrieve a list of games based on year
+     * @param anAparitie int
+     * @return game List
+     */
+    @GetMapping({"/year/{anAparitie}"})
+    public ResponseEntity<List<Game>> getGamesByAnAparitie(@PathVariable("anAparitie") int anAparitie){
+        return new ResponseEntity<>(gameService.getGamesByAnAparitie(anAparitie), HttpStatus.OK);
+    }
+
 }

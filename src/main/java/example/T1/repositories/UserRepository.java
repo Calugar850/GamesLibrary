@@ -1,5 +1,6 @@
 package example.T1.repositories;
 
+import example.T1.model.BaseUser;
 import org.springframework.data.repository.CrudRepository;
 import example.T1.model.User;
 import org.springframework.stereotype.Repository;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * This class is responsable for communication with the table in Database
  */
 @Repository
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface UserRepository extends CrudRepository<BaseUser, Integer> {
 
 }
 

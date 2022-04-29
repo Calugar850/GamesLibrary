@@ -1,6 +1,7 @@
 package example.T1.services;
 
 import example.T1.model.Bill;
+import example.T1.model.EnumUsers;
 
 import java.util.List;
 
@@ -40,4 +41,12 @@ public interface BillService {
      * @param id integer
      */
     void deleteBillByID(Integer id);
+
+    /**
+     * A method for generate a final bill before the purchase of a client
+     * @param idUser Integer
+     * @param tip EnumUser
+     * @return bill
+     */
+    Bill generateBill(Integer idUser, EnumUsers tip);
 }

@@ -1,6 +1,7 @@
 package example.T1.controllers;
 
 import example.T1.model.Bill;
+import example.T1.model.EnumUsers;
 import example.T1.model.User;
 import example.T1.repositories.BillRepository;
 import example.T1.services.BillService;
@@ -143,4 +144,16 @@ public class BillController {
         billService.deleteBillByID(idFactura);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    /**
+     * A method for generate a final bill before the purchase of a client
+     * @param idUser Integer
+     * @param tip EnumUser
+     * @return bill
+     */
+    @PutMapping("/generateBill/{idUser}/{tip}")
+    public ResponseEntity<Bill> generateBill(@PathVariable("idUser") Integer idUser, @PathVariable EnumUsers tip){
+        return new ResponseEntity<>(billService.generateBill(idUser,tip),HttpStatus.NO_CONTENT);
+    }
+
 }

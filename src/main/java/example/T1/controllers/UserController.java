@@ -1,7 +1,8 @@
 package example.T1.controllers;
 
-import example.T1.model.User;
+import example.T1.model.*;
 import example.T1.repositories.UserRepository;
+import example.T1.services.GameService;
 import example.T1.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -85,6 +86,7 @@ public class UserController {
 
     UserService userService;
 
+
     /**
      *
      * @param userService interface
@@ -94,33 +96,34 @@ public class UserController {
     }
 
     /**
-     * The function receives a GET request, processes it and gives back a list of User as a response.
+     * The function receives a GET request, processes it and gives back a list of type of Users as a response.
      * @return List users
      */
-    @GetMapping
-    public ResponseEntity<List<User>> getAllUsers(){
-        List<User> users = userService.getUsers();
+    @GetMapping("{tip}")
+    public ResponseEntity<List<User>> getAllUsers(@PathVariable EnumUsers tip){
+        List<User> users = userService.getUsers(tip);
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     /**
-     * The function receives a GET request, processes it, and gives back a list of User as a response.
-     * @param idUser integer
+     * The function receives a GET request, processes it, and gives back a type of User as a response.
+     * @param idUser integer, tip EnumUsers
      * @return User
      */
-    @GetMapping({"/{idUser}"})
-    public ResponseEntity<User> getUserByID(@PathVariable Integer idUser){
-        return new ResponseEntity<>(userService.getUserByID(idUser), HttpStatus.OK);
+    @GetMapping({"/{idUser}/{tip}"})
+    public ResponseEntity<User> getUserByID(@PathVariable Integer idUser, @PathVariable EnumUsers tip){
+        return new ResponseEntity<>(userService.getUserByID(idUser, tip), HttpStatus.OK);
     }
 
     /**
      * The function receives a POST request, processes it, creates a new User and saves it to the database, and returns a resource link to the created user.
-     * @param user object
+     * @param user UserFactoryObject
+     * @param tip EnumUsers
      * @return User
      */
-    @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        User user1 = userService.createUser(user);
+   @PostMapping("{tip}")
+    public ResponseEntity<User> createUser(@PathVariable EnumUsers tip, @RequestBody UserFactory user){
+        User user1 = userService.createUser(user.createUser(tip));
         HttpHeaders httpHeaders=new HttpHeaders();
         httpHeaders.add("user", "users"+user1.getIdUser().toString());
         return new ResponseEntity<>(user1, httpHeaders, HttpStatus.CREATED);
@@ -130,23 +133,75 @@ public class UserController {
      * The function receives a PUT request, updates the User with the specified Id and returns the updated User
      * @param idUser integer
      * @param user object
+     * @param tip EnumUser
      * @return User
      */
-    @PutMapping({"/{idUser}"})
-    public ResponseEntity<User> updateUser(@PathVariable("idUser") Integer idUser, @RequestBody User user){
-        userService.updateUser(idUser, user);
-        return new ResponseEntity<>(userService.getUserByID(idUser), HttpStatus.OK);
+    @PutMapping({"/{idUser}/{tip}"})
+    public ResponseEntity<User> updateUser(@PathVariable("idUser") Integer idUser, @PathVariable EnumUsers tip, @RequestBody UserFactory user){
+        User user1 = user.createUser(tip);
+        userService.updateUser(idUser, tip, user1);
+        return new ResponseEntity<>(userService.getUserByID(idUser, tip), HttpStatus.OK);
     }
 
     /**
      * The function receives a DELETE request, deletes the User with the specified Id.
      * @param idUser integer
-     * @return USer
+     * @param tip EnumUser
+     * @return User
      */
-    @DeleteMapping({"/{idUser}"})
-    public ResponseEntity<User> deleteUserByID(@PathVariable("idUser") Integer idUser){
-        userService.deleteUserByID(idUser);
+   @DeleteMapping({"/{idUser}/{tip}"})
+    public ResponseEntity<User> deleteUserByID(@PathVariable("idUser") Integer idUser, @PathVariable EnumUsers tip){
+        userService.deleteUserByID(idUser, tip);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    /**
+     * This method is used to login a user in application
+     * @param tip EnumUser
+     * @param user UserFactoryUser
+     * @return user
+     */
+    @GetMapping("/login/{tip}")
+    public ResponseEntity<User> loginUser(@PathVariable EnumUsers tip, @RequestBody UserFactory user){
+        User user1 = user.createUser(tip);
+        User u2 = userService.loginUser(tip, user1);
+        return new ResponseEntity<>(userService.getUserByID(u2.getIdUser(), tip), HttpStatus.OK);
+    }
+
+    /**
+     * This method add a game in user cart and return the list of games from cart
+     * @param idUser Integer
+     * @param tip EnumUser
+     * @param idGame Integer
+     * @return games
+     */
+    @PutMapping("/addGame/{idUser}/{tip}/{idGame}")
+    public ResponseEntity<List<Game>> addGameInCart(@PathVariable Integer idUser, @PathVariable EnumUsers tip, @PathVariable Integer idGame){
+       return new ResponseEntity<>(userService.addGameInCart(idUser,tip,idGame), HttpStatus.OK);
+    }
+
+    /**
+     * This method remove a game in user cart and return the list of games from cart
+     * @param idUser Integer
+     * @param tip EnumUser
+     * @param idGame Integer
+     * @return games
+     */
+    @DeleteMapping("/addGame/{idUser}/{tip}/{idGame}")
+    public ResponseEntity<List<Game>> deleteUserByID(@PathVariable Integer idUser, @PathVariable EnumUsers tip, @PathVariable Integer idGame){
+        userService.deleteGameFromCart(idUser,tip,idGame);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    /**
+     * A method which generate a bill for an purchase of a client
+     * @param idUser Integer
+     * @param tip EnumUSer
+     * @return bill
+     */
+    @PutMapping("/generateBillPerClient/{idUser}/{tip}")
+    public ResponseEntity<List<Bill>> generateBillPerClient(@PathVariable Integer idUser, @PathVariable EnumUsers tip){
+        return new ResponseEntity<>(userService.generateBillPerClient(idUser,tip), HttpStatus.OK);
     }
 
 }

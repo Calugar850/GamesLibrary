@@ -18,13 +18,6 @@ public class Bill {
     private String adresa;
     private float suma;
 
-    @OneToMany
-    private List<Game> games=new ArrayList<>();
-
-    /*@OneToOne
-    private User user;
-    */
-
     /**
      * default constructor
      */
@@ -43,7 +36,7 @@ public class Bill {
     }
 
     /**
-     *
+     * Method Implementation
      * @return Integer
      */
     public Integer getIdFactura() {
@@ -51,7 +44,7 @@ public class Bill {
     }
 
     /**
-     *
+     * Method Implementation
      * @param idFactura integer
      */
     public void setIdFactura(Integer idFactura) {
@@ -59,7 +52,7 @@ public class Bill {
     }
 
     /**
-     *
+     * Method Implementation
      * @return String
      */
     public String getNume() {
@@ -67,7 +60,7 @@ public class Bill {
     }
 
     /**
-     *
+     * Method Implementation
      * @param nume string
      */
     public void setNume(String nume) {
@@ -75,7 +68,7 @@ public class Bill {
     }
 
     /**
-     *
+     * Method Implementation
      * @return String
      */
     public String getAdresa() {
@@ -83,7 +76,7 @@ public class Bill {
     }
 
     /**
-     *
+     * Method Implementation
      * @param adresa string
      */
     public void setAdresa(String adresa) {
@@ -91,7 +84,7 @@ public class Bill {
     }
 
     /**
-     *
+     * Method Implementation
      * @return float
      */
     public float getSuma() {
@@ -99,7 +92,7 @@ public class Bill {
     }
 
     /**
-     *
+     * Method Implementation
      * @param suma float
      */
     public void setSuma(float suma) {
@@ -107,18 +100,14 @@ public class Bill {
     }
 
     /**
-     *
-     * @return List games
+     * This method return our object under a string form for a better visualization
+     * @return String
      */
-    public List<Game> getGames() {
-        return games;
-    }
-
-    /**
-     *
-     * @param games object
-     */
-    public void setGames(List<Game> games) {
-        this.games = games;
+    @Override
+    public String toString() {
+        return "idFactura " + idFactura +
+                ", nume " + nume +
+                ", adresa " + adresa +
+                ", suma " + suma;
     }
 }

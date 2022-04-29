@@ -3,169 +3,127 @@ package example.T1.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import example.T1.FactoryPattern.Angajat;
+import example.T1.FactoryPattern.Colaborator;
+import example.T1.FactoryPattern.Enums;
+import example.T1.FactoryPattern.Vizitator;
 import example.T1.model.Game;
 
 /**
- * This class is user model for Database
+ * This interface is used for Factory Pattern Implementation
  */
-@Entity // This tells Hibernate to make a table out of this class
-public class User {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer idUser;
-    private String username;
-    private String email;
-    private String parola;
-    private String adresa;
-    private int tip;
 
-    @OneToMany
-    private List<Game> games=new ArrayList<>();
+public interface User {
 
     /**
-     *
-     * @param username string
-     * @param email string
-     * @param parola string
-     * @param adresa string
-     * @param tip int
-     */
-    public User(String username, String email, String parola, String adresa, int tip) {
-        this.username = username;
-        this.email = email;
-        this.parola = parola;
-        this.adresa = adresa;
-        this.tip = tip;
-    }
-
-    /**
+     * Method Declaration
      * @return Integer
      */
-    public Integer getIdUser() {
-        return idUser;
-    }
+    public Integer getIdUser();
 
     /**
-     *
+     * Method Declaration
      * @param idUser integer
      */
-
-    public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
-    }
+    public void setIdUser(Integer idUser);
 
     /**
-     *
+     * Method Declaration
      * @return String
      */
-
-    public String getUsername() {
-        return username;
-    }
+    public String getUsername();
 
     /**
-     *
+     * Method Declaration
      * @param username string
      */
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    public void setUsername(String username);
 
     /**
-     *
+     * Method Declaration
      * @return String
      */
-
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail();
 
     /**
-     *
+     * Method Declaration
      * @param email string
      */
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setEmail(String email);
 
     /**
-     *
+     * Method Declaration
      * @return String
      */
-    public String getParola() {
-        return parola;
-    }
+    public String getParola();
 
     /**
-     *
+     * Method Declaration
      * @param parola string
      */
-    public void setParola(String parola) {
-        this.parola = parola;
-    }
+    public void setParola(String parola);
 
     /**
-     *
+     * Method Declaration
      * @return String
      */
-    public String getAdresa() {
-        return adresa;
-    }
+    public String getAdresa();
 
     /**
-     *
+     * Method Declaration
      * @param adresa string
      */
-    public void setAdresa(String adresa) {
-        this.adresa = adresa;
-    }
+    public void setAdresa(String adresa);
 
     /**
-     *
+     * Method Declaration
      * @return int
      */
-    public int isTip() {
-        return tip;
-    }
+    public int isTip();
 
     /**
-     *
+     * Method Declaration
      * @param tip int
      */
-    public void setTip(int tip) {
-        this.tip = tip;
-    }
+    public void setTip(int tip);
 
     /**
-     *
+     * Method Declaration
      * @return int
      */
-    public int getTip() {
-        return tip;
-    }
+    public int getTip();
 
     /**
-     *
+     * Method Declaration
      * @return List games
      */
-    public List<Game> getGames() {
-        return games;
-    }
+    public List<Game> getGames();
 
     /**
-     *
+     * Method Declaration
      * @param games object
      */
-    public void setGames(List<Game> games) {
-        this.games = games;
-    }
+    public void setGames(List<Game> games);
 
     /**
-     * default constructor
+     * Method Declaration
+     * @return List bills
      */
-    public User() {
-    }
+    public List<Bill> getBills();
+
+    /**
+     * Method Declaration
+     * @param bills
+     */
+    public void setBills(List<Bill> bills);
+
+    /**
+     * Method Declaration
+     * @return string
+     */
+    @Override
+    public String toString();
+
 }
 
