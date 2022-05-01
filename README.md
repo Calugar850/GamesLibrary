@@ -12,3 +12,9 @@ At a second commit the project was update with junit tests for the majority of t
   
   The second pack, FactoryPattern contain 5 classes, 1 abstract class, 1 enum and 1 interface. This files consist in a basic implementation of factory pattern, to be more exactly is an example. Factory pattern is one of the most used design patterns in Java. This type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object. In Factory pattern, we create object without exposing the creation logic to the client and refer to newly created object using a common interface. For this implementation we have an abstract class which extends 3 other classes for different type of people who has an acces in a building. In every class was override zile method. Also we have en enum with every type of person, and a class with a single method (to create a type of person based of value of enum parameter). also we have an interface and a class wihich to implements an interface for eample of implementation of factory pattern with interface, because this pattern can be implemented with an abstract class or an interface.
   
+  In model pack was added an enum type, an interface, a class to create a type of user, this files was added for factory pattern implementation, also every type of user represent a table in our database. The main difference between this 3 type of users consist into a value of discount applied at every purchase which they do.
+  
+  The repository packet contain now 6 interfaces, 2 of them was added for accesing PremiumUser table and AdminUser table. And the last Repository interface was added for implementation when the conncection with database it's lost and it can't be restored for a while.
+  
+  
+  
