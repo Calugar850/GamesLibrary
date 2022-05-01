@@ -16,5 +16,9 @@ At a second commit the project was update with junit tests for the majority of t
   
   The repository packet contain now 6 interfaces, 2 of them was added for accesing PremiumUser table and AdminUser table. And the last Repository interface was added for implementation when the conncection with database it's lost and it can't be restored for a while.
   
+  The controllers and services packs contains the same number of files. In UserController was implemented a login functionality, adding and removing a game for a cart and generate a final bill for specific user, and the method for CRUD operations was modified for executing opearions on only type of users table.The BillController was added a method for create a bill for an user with the final value. The GameController can retrieve a list of games based on a filter, was created 3 filter, based on publisher of the game, year when was released and type of game.The services layer implements same method of the controllers layer, but here the data are retrieved form tables.
+  
+  In the test folder was created 4 packages, 1 for every layer of the projects. In controllers folder was testing all method from every conroller. In user controllers some methods was tested for every type of users. In services folder the testing was executed for every method and some method which is specified for an user was tested for every type of user. In respository folder was tested only 5 of 6 repository because only this is used in project. Here was tested the main opeartion, findAll, findById, deleteById and save. In modelTest exist only a class because the testing for models was implemted in only a file. I consider to do this because the majority of methods consist in getters and setters.
+  
   
   
