@@ -18,7 +18,7 @@ public interface UserService {
      * @param id integer
      * @return User
      */
-    User getUserByID(Integer id, EnumUsers tip);
+    User getUserByID(Integer id);
 
     /**
      *

@@ -104,22 +104,25 @@ public class BillServiceImpl implements BillService {
                 s+=g.getPret();
             }
             b = new Bill(user1.getUsername(), user1.getAdresa(), s);
-            createBill(b);
+            b = createBill(b);
+            return b;
         }else if(tip==EnumUsers.PremiumUser){
             PremiumUser user1 = premiumUserRepository.findById(idUser).get();
             for(Game g: user1.getGames()){
                 s+=g.getPret();
             }
             b = new Bill(user1.getUsername(), user1.getAdresa(), s);
-            createBill(b);
+            b = createBill(b);
+            return b;
         }else if(tip==EnumUsers.AdminUser){
             AdminUser user1 = adminUserRepository.findById(idUser).get();
             for(Game g: user1.getGames()){
                 s+=g.getPret();
             }
             b = new Bill(user1.getUsername(), user1.getAdresa(), s);
-            createBill(b);
+            b = createBill(b);
+            return b;
         }
-        return billRepository.findById(b.getIdFactura()).get();
+        return null;
     }
 }

@@ -153,7 +153,8 @@ public class BillController {
      */
     @PutMapping("/generateBill/{idUser}/{tip}")
     public ResponseEntity<Bill> generateBill(@PathVariable("idUser") Integer idUser, @PathVariable EnumUsers tip){
-        return new ResponseEntity<>(billService.generateBill(idUser,tip),HttpStatus.NO_CONTENT);
+        Bill bill =  billService.generateBill(idUser,tip);
+        return new ResponseEntity<>(bill, HttpStatus.NO_CONTENT);
     }
 
 }

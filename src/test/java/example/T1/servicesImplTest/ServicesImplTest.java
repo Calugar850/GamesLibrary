@@ -46,7 +46,7 @@ public class ServicesImplTest {
         user.setIdUser(1);
         when(userRepository.findById(1)).thenReturn(java.util.Optional.of(user));
 
-        User result = userService.getUserByID(1,EnumUsers.BaseUser);
+        User result = userService.getUserByID(1);
 
         assertThat(result.getUsername()).isEqualTo(user.getUsername());
     }
@@ -60,7 +60,7 @@ public class ServicesImplTest {
         user.setIdUser(1);
         when(premiumUserRepository.findById(1)).thenReturn(java.util.Optional.of(user));
 
-        User result = userService.getUserByID(1,EnumUsers.PremiumUser);
+        User result = userService.getUserByID(1);
 
         assertThat(result.getUsername()).isEqualTo(user.getUsername());
     }
@@ -74,7 +74,7 @@ public class ServicesImplTest {
         user.setIdUser(1);
         when(adminUserRepository.findById(1)).thenReturn(java.util.Optional.of(user));
 
-        User result = userService.getUserByID(1,EnumUsers.AdminUser);
+        User result = userService.getUserByID(1);
 
         assertThat(result.getUsername()).isEqualTo(user.getUsername());
     }

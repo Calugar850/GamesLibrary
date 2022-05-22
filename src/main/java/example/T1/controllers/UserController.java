@@ -110,9 +110,9 @@ public class UserController {
      * @param idUser integer, tip EnumUsers
      * @return User
      */
-    @GetMapping({"/{idUser}/{tip}"})
-    public ResponseEntity<User> getUserByID(@PathVariable Integer idUser, @PathVariable EnumUsers tip){
-        return new ResponseEntity<>(userService.getUserByID(idUser, tip), HttpStatus.OK);
+    @GetMapping({"/oneUser/{idUser}"})
+    public ResponseEntity<User> getUserByID(@PathVariable Integer idUser){
+        return new ResponseEntity<>(userService.getUserByID(idUser), HttpStatus.OK);
     }
 
     /**
@@ -124,9 +124,8 @@ public class UserController {
    @PostMapping("{tip}")
     public ResponseEntity<User> createUser(@PathVariable EnumUsers tip, @RequestBody UserFactory user){
         User user1 = userService.createUser(user.createUser(tip));
-        HttpHeaders httpHeaders=new HttpHeaders();
-        httpHeaders.add("user", "users"+user1.getIdUser().toString());
-        return new ResponseEntity<>(user1, httpHeaders, HttpStatus.CREATED);
+        System.out.println(user1.toString());
+        return new ResponseEntity<>(user1, HttpStatus.CREATED);
     }
 
     /**
@@ -140,7 +139,7 @@ public class UserController {
     public ResponseEntity<User> updateUser(@PathVariable("idUser") Integer idUser, @PathVariable EnumUsers tip, @RequestBody UserFactory user){
         User user1 = user.createUser(tip);
         userService.updateUser(idUser, tip, user1);
-        return new ResponseEntity<>(userService.getUserByID(idUser, tip), HttpStatus.OK);
+        return new ResponseEntity<>(userService.getUserByID(idUser), HttpStatus.OK);
     }
 
     /**
@@ -161,11 +160,11 @@ public class UserController {
      * @param user UserFactoryUser
      * @return user
      */
-    @GetMapping("/login/{tip}")
+    @PostMapping("/login/{tip}")
     public ResponseEntity<User> loginUser(@PathVariable EnumUsers tip, @RequestBody UserFactory user){
         User user1 = user.createUser(tip);
-        User u2 = userService.loginUser(tip, user1);
-        return new ResponseEntity<>(userService.getUserByID(u2.getIdUser(), tip), HttpStatus.OK);
+        user1 = userService.loginUser(tip, user1);
+        return new ResponseEntity<>(user1, HttpStatus.OK);
     }
 
     /**
@@ -177,7 +176,8 @@ public class UserController {
      */
     @PutMapping("/addGame/{idUser}/{tip}/{idGame}")
     public ResponseEntity<List<Game>> addGameInCart(@PathVariable Integer idUser, @PathVariable EnumUsers tip, @PathVariable Integer idGame){
-       return new ResponseEntity<>(userService.addGameInCart(idUser,tip,idGame), HttpStatus.OK);
+        List<Game> games =userService.addGameInCart(idUser,tip,idGame);
+       return new ResponseEntity<>(games, HttpStatus.OK);
     }
 
     /**

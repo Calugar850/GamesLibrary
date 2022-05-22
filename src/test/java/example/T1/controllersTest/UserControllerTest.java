@@ -89,9 +89,9 @@ public class UserControllerTest {
     public void getBaseUserbyIdTest(){
         BaseUser user = new BaseUser("Andrei","andrei@gmail.com","dsadsad","Strada Trecutului Nr 158",0);
 
-        when(userService.getUserByID(1,EnumUsers.BaseUser)).thenReturn(user);
+        when(userService.getUserByID(1)).thenReturn(user);
 
-        ResponseEntity<User> result = userController.getUserByID(1,EnumUsers.BaseUser);
+        ResponseEntity<User> result = userController.getUserByID(1);
 
         assertThat(result.getBody().getUsername()).isEqualTo(user.getUsername());
     }
@@ -103,9 +103,9 @@ public class UserControllerTest {
     public void getPremiumUserbyIdTest(){
         PremiumUser user = new PremiumUser("Andrei","andrei@gmail.com","dsadsad","Strada Trecutului Nr 158",0);
 
-        when(userService.getUserByID(1,EnumUsers.PremiumUser)).thenReturn(user);
+        when(userService.getUserByID(1)).thenReturn(user);
 
-        ResponseEntity<User> result = userController.getUserByID(1,EnumUsers.PremiumUser);
+        ResponseEntity<User> result = userController.getUserByID(1);
 
         assertThat(result.getBody().getUsername()).isEqualTo(user.getUsername());
     }
@@ -117,9 +117,9 @@ public class UserControllerTest {
     public void getAdminUserbyIdTest(){
         AdminUser user = new AdminUser("Andrei","andrei@gmail.com","dsadsad","Strada Trecutului Nr 158",0);
 
-        when(userService.getUserByID(1,EnumUsers.AdminUser)).thenReturn(user);
+        when(userService.getUserByID(1)).thenReturn(user);
 
-        ResponseEntity<User> result = userController.getUserByID(1,EnumUsers.AdminUser);
+        ResponseEntity<User> result = userController.getUserByID(1);
 
         assertThat(result.getBody().getUsername()).isEqualTo(user.getUsername());
     }

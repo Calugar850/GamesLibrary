@@ -87,15 +87,20 @@ public class UserServiceImpl implements UserService {
      * @return User
      */
     @Override
-    public User getUserByID(Integer id, EnumUsers tip) {
-        if(tip==EnumUsers.BaseUser){
-            return userRepository.findById(id).get();
-        }else if(tip==EnumUsers.PremiumUser){
-            return premiumUserRepository.findById(id).get();
-        }else if(tip==EnumUsers.AdminUser){
-            return adminUserRepository.findById(id).get();
+    public User getUserByID(Integer id) {
+        User user;
+        if(userRepository.findById(id).isPresent()){
+            user = userRepository.findById(id).get();
+            return user;
+        }else if(premiumUserRepository.findById(id).isPresent()) {
+            user = premiumUserRepository.findById(id).get();
+            return user;
+        }else if(adminUserRepository.findById(id).isPresent()){
+            user = adminUserRepository.findById(id).get();
+            return user;
+        }else{
+            return null;
         }
-        return null;
        //return userRepositoryAvarie.findById(id);
     }
 
@@ -106,15 +111,6 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User createUser(User user) {
-        MessageDigest messageDigest = null;
-        try {
-            messageDigest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        messageDigest.update(user.getParola().getBytes());
-        String stringHash = new String(messageDigest.digest());
-        user.setParola(stringHash);
         if(user.getTip()==0){
             return userRepository.save((BaseUser)user);
         }
@@ -182,40 +178,28 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User loginUser(EnumUsers tip, User user){
-        MessageDigest messageDigest = null;
-        try {
-            messageDigest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        messageDigest.update(user.getParola().getBytes());
-        String stringHash = new String(messageDigest.digest());
-        User users;
         if(tip==EnumUsers.BaseUser) {
             List<BaseUser> baseUsers = new ArrayList<>();
             userRepository.findAll().forEach(baseUsers::add);
             for (BaseUser b : baseUsers) {
-                if(b.getParola().equals(stringHash) && b.getUsername().equals(user.getUsername())){
-                    users=b;
-                    return users;
+                if(b.getParola().equals(user.getParola()) && b.getUsername().equals(user.getUsername())){
+                    return b;
                 }
             }
         }else if(tip==EnumUsers.PremiumUser){
             List<PremiumUser> premiumUsers = new ArrayList<>();
             premiumUserRepository.findAll().forEach(premiumUsers::add);
             for (PremiumUser p : premiumUsers) {
-                if(p.getParola().equals(stringHash) && p.getUsername().equals(user.getUsername())){
-                    users=p;
-                    return users;
+                if(p.getParola().equals(user.getParola()) && p.getUsername().equals(user.getUsername())){
+                    return p;
                 }
             }
         }else if(tip==EnumUsers.AdminUser){
             List<AdminUser> adminUsers = new ArrayList<>();
             adminUserRepository.findAll().forEach(adminUsers::add);
             for (AdminUser a : adminUsers) {
-                if(a.getParola().equals(stringHash) && a.getUsername().equals(user.getUsername())){
-                    users=a;
-                    return users;
+                if(a.getParola().equals(user.getParola()) && a.getUsername().equals(user.getUsername())){
+                    return a;
                 }
             }
         }
