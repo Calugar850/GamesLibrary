@@ -29,3 +29,9 @@ At a second commit the project was updated with junit tests for the majority of 
 
   
 # Games Library Frontend
+  
+  For this part of the project, an android app was creted for frontend development. The programming language in which app was written it's kotlin, and in the project we have 16 files, which represents activities for app, model class, data class and the interface for communication with the backend which was develop in java spring. This part of the project was pushed into another commit (here is the link: https://github.com/Calugar850/GamesLibraryFrontend) because this part was developed in android studio.
+  
+  Firstly we have 3 data class for mapping the data comes from the request. This 3 class are: User, Bill, Game2. Also we have 2 class for creating game object and user object for sending a POST or a PUT request. This class are UserFactory and Game. For identify a type of user in the project exist an enum class with all type of users (BaseUser, PremiumUser, AdminUser).
+  
+  For make an API request we have an interface (ApiInterface) where we have mapped all the necesarry requests for a normal behaviour of the app. In this interface exist 10 request witch retrieve data from and put data into database.
